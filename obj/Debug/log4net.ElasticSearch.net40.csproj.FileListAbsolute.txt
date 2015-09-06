@@ -1,0 +1,10 @@
+D:\WORK_SHOP\src\log4stash\log4stash\bin\lib\net40\log4stash.dll
+D:\WORK_SHOP\src\log4stash\log4stash\bin\lib\net40\log4stash.pdb
+D:\WORK_SHOP\src\log4stash\log4stash\src\log4net.ElasticSearch.net40\obj\Debug\log4net.ElasticSearch.net40.csprojResolveAssemblyReference.cache
+D:\WORK_SHOP\src\log4stash\log4stash\src\log4net.ElasticSearch.net40\obj\Debug\log4stash.dll
+D:\WORK_SHOP\src\log4stash\log4stash\src\log4net.ElasticSearch.net40\obj\Debug\log4stash.pdb
+D:\迅雷下载\ThriftCSharp\log4stash\log4stash\bin\lib\net40\log4stash.dll
+D:\迅雷下载\ThriftCSharp\log4stash\log4stash\bin\lib\net40\log4stash.pdb
+D:\迅雷下载\ThriftCSharp\log4stash\log4stash\src\log4net.ElasticSearch.net40\obj\Debug\log4net.ElasticSearch.net40.csprojResolveAssemblyReference.cache
+D:\迅雷下载\ThriftCSharp\log4stash\log4stash\src\log4net.ElasticSearch.net40\obj\Debug\log4stash.dll
+D:\迅雷下载\ThriftCSharp\log4stash\log4stash\src\log4net.ElasticSearch.net40\obj\Debug\log4stash.pdb
