@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net">
-      <HintPath>..\Log4netElasticSearchAppendar\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+      <HintPath>..\Log4NetAppander\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,7 +52,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Log4netElasticSearchAppendar\log4net.ElasticSearch.csproj">
+    <ProjectReference Include="..\log4net.ElasticSearch\log4net.ElasticSearch.csproj">
       <Project>{22964cb0-8a39-41ea-807d-b5216d27df70}</Project>
       <Name>log4net.ElasticSearch</Name>
     </ProjectReference>
