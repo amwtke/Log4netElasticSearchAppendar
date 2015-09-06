@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4BE11CFC-929C-440F-BB54-FB6E20FC274D}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{E22C9F27-019C-4965-BEC6-F342338836E6}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>testAppendar</RootNamespace>
-    <AssemblyName>testAppendar</AssemblyName>
+    <RootNamespace>LogHelper</RootNamespace>
+    <AssemblyName>LogHelper</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -25,7 +24,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -35,6 +33,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\Log4NetAppander\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,24 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="HTTP\CallBacks\CallBacks.cs" />
+    <Compile Include="HTTP\CallBacks\process\IProcess.cs" />
+    <Compile Include="HTTP\CallBacks\process\MyProcess.cs" />
+    <Compile Include="HTTP\HTTPHelper.cs" />
+    <Compile Include="HTTP\TaskAsyncHelper.cs" />
+    <Compile Include="LogHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\log4net.ElasticSearch\log4net.ElasticSearch.csproj">
-      <Project>{22964cb0-8a39-41ea-807d-b5216d27df70}</Project>
-      <Name>log4net.ElasticSearch</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LogHelper\LogHelper.csproj">
-      <Project>{e22c9f27-019c-4965-bec6-f342338836e6}</Project>
-      <Name>LogHelper</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
