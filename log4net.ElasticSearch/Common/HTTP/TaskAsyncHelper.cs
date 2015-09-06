@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace LogHelper
+namespace log4net.ElasticSearch
 {
     public static class AsyncHelper
     {

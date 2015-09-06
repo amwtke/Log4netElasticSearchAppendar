@@ -173,7 +173,8 @@ namespace log4net.ElasticSearch
 
                     if (IndexAsync)
                     {
-                        _client.IndexBulkAsync(bulkToSend);
+                        Console.WriteLine(System.Threading.Thread.CurrentThread.ManagedThreadId);
+                        _client.ProcessIndexBulkAsync(bulkToSend);
                     }
                     else
                     {
@@ -196,19 +197,24 @@ namespace log4net.ElasticSearch
 
             var logEvent = new Dictionary<string, object>();
 
-            logEvent["TimeStamp"] = loggingEvent.TimeStamp.ToUniversalTime().ToString("O");
-            logEvent["LoggerName"] = loggingEvent.LoggerName;
-            logEvent["HostName"] = MachineName;
-
-            if (FixedFields.ContainsFlag(FixFlags.ThreadName))
-            {
-                logEvent["ThreadName"] = loggingEvent.ThreadName;
-            }
 
             if (FixedFields.ContainsFlag(FixFlags.Message) && loggingEvent.MessageObject != null)
             {
                 logEvent["Message"] = loggingEvent.MessageObject.ToString();
                 //logEvent["Message"] = loggingEvent.RenderedMessage;
+            }
+
+            logEvent["TimeStamp"] = loggingEvent.TimeStamp.ToUniversalTime().ToString("O");
+            logEvent["LoggerName"] = loggingEvent.LoggerName;
+            logEvent["HostName"] = MachineName;
+            if (loggingEvent.Level != null)
+            {
+                logEvent["Level"] = loggingEvent.Level.DisplayName;
+            }
+
+            if (FixedFields.ContainsFlag(FixFlags.ThreadName))
+            {
+                logEvent["ThreadName"] = loggingEvent.ThreadName;
             }
 
             if (FixedFields.ContainsFlag(FixFlags.Exception) && loggingEvent.ExceptionObject != null)
@@ -219,11 +225,6 @@ namespace log4net.ElasticSearch
             if (FixedFields.ContainsFlag(FixFlags.Domain))
             {
                 logEvent["Domain"] = loggingEvent.Domain;
-            }
-
-            if (loggingEvent.Level != null)
-            {
-                logEvent["Level"] = loggingEvent.Level.DisplayName;
             }
 
             if (FixedFields.ContainsFlag(FixFlags.Identity))

@@ -20,6 +20,7 @@ namespace log4net.ElasticSearch
         void PutTemplateRaw(string templateName, string rawBody);
         void IndexBulk(IEnumerable<InnerBulkOperation> bulk);
         IAsyncResult IndexBulkAsync(IEnumerable<InnerBulkOperation> bulk);
+        void ProcessIndexBulkAsync(IEnumerable<InnerBulkOperation> bulk);
     }
     
     public class InnerBulkOperation 
@@ -100,12 +101,31 @@ namespace log4net.ElasticSearch
         
         public IAsyncResult IndexBulkAsync(IEnumerable<InnerBulkOperation> bulk)
         {
+            Console.WriteLine(System.Threading.Thread.CurrentThread.ManagedThreadId);
             var webRequest = PrepareBulkAndSend(bulk);
             return webRequest.BeginGetResponse(FinishGetResponse, webRequest);
         }
 
+        public void ProcessIndexBulkAsync(IEnumerable<InnerBulkOperation> bulk)
+        {
+            Console.WriteLine("process:"+System.Threading.Thread.CurrentThread.ManagedThreadId);
+            //String rqString;
+            //var webRequest = PrepareBulkAndSend2(bulk, out rqString);
+            //if (rqString != null && rqString.Length > 0)
+            //{
+            //    HTTPHelper.SendWebHttpRequestFullAsync(webRequest, rqString, WebRequestsCallBacks.WebRequestCallBacks);
+            //}
+
+            //rqString = PrepareBulk(bulk);
+            //HTTPHelper.SendWebHttpRequestFullAsync2(_url, rqString, _credentials, WebRequestsCallBacks.WebRequestCallBacks2);
+
+            HTTPHelper.SendWebHttpRequestFullAsync3(_url, bulk, _credentials, WebRequestsCallBacks.WebRequestCallBacks3);
+
+        }
+
         private void FinishGetResponse(IAsyncResult result)
         {
+            Console.WriteLine(System.Threading.Thread.CurrentThread.ManagedThreadId);
             var webRequest = (WebRequest)result.AsyncState;
             using (var httpResponse = (HttpWebResponse)webRequest.EndGetResponse(result))
             {
@@ -125,6 +145,18 @@ namespace log4net.ElasticSearch
             webRequest.Timeout = 10000;
             SetBasicAuthHeader(webRequest);
             SendRequest(webRequest, requestString);
+            return webRequest;
+        }
+
+        private WebRequest PrepareBulkAndSend2(IEnumerable<InnerBulkOperation> bulk,out string requestString)
+        {
+            requestString = PrepareBulk(bulk);
+
+            var webRequest = WebRequest.Create(string.Concat(_url, "_bulk"));
+            webRequest.ContentType = "text/plain";
+            webRequest.Method = "POST";
+            webRequest.Timeout = 10000;
+            SetBasicAuthHeader(webRequest);
             return webRequest;
         }
 

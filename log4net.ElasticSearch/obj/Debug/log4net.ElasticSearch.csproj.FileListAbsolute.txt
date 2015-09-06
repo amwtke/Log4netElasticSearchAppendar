@@ -5,5 +5,6 @@ D:\WORK_SHOP\src\log4stash\log4stash\src\log4net.ElasticSearch\obj\Debug\log4sta
 D:\WORK_SHOP\src\log4stash\log4stash\src\log4net.ElasticSearch\obj\Debug\log4stash.pdb
 D:\WORK_SHOP\src\bin\lib\net45\log4stash.dll
 D:\WORK_SHOP\src\bin\lib\net45\log4stash.pdb
+D:\WORK_SHOP\src\Log4netElasticSearchAppendar\log4net.ElasticSearch\obj\Debug\log4net.ElasticSearch.csprojResolveAssemblyReference.cache
 D:\WORK_SHOP\src\Log4netElasticSearchAppendar\log4net.ElasticSearch\obj\Debug\log4stash.dll
 D:\WORK_SHOP\src\Log4netElasticSearchAppendar\log4net.ElasticSearch\obj\Debug\log4stash.pdb

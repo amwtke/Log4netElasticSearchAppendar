@@ -48,6 +48,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Attribute.cs" />
+    <Compile Include="Common\bizs\BizObject.cs" />
+    <Compile Include="Common\HTTP\CallBacks\CallBacks.cs" />
+    <Compile Include="Common\HTTP\CallBacks\process\IProcess.cs" />
+    <Compile Include="Common\HTTP\CallBacks\process\MyProcess.cs" />
+    <Compile Include="Common\HTTP\HTTPHelper.cs" />
+    <Compile Include="Common\HTTP\TaskAsyncHelper.cs" />
     <Compile Include="ElasticClient.cs" />
     <Compile Include="Filters\AddValueFilter.cs" />
     <Compile Include="AssemblyVersionInfo.cs" />
