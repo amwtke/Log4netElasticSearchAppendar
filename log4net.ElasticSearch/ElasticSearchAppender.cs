@@ -204,7 +204,7 @@ namespace log4net.ElasticSearch
                 //logEvent["Message"] = loggingEvent.RenderedMessage;
             }
 
-            logEvent["TimeStamp"] = loggingEvent.TimeStamp.ToUniversalTime().ToString("O");
+            logEvent["TimeStamp"] = loggingEvent.TimeStamp.ToString("O");
             logEvent["LoggerName"] = loggingEvent.LoggerName;
             logEvent["HostName"] = MachineName;
             if (loggingEvent.Level != null)

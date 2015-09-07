@@ -17,7 +17,7 @@ namespace testAppendar
                 for (int i = 0; i < 5000;i++)
                 {
                     Console.WriteLine(i);
-                    LogHelper.LogHelper.LogInfoAsync(typeof(Program), "团结一致" + DateTime.Now.ToString());
+                    LogHelper.LogHelper.LogInfoAsync(typeof(Program), "嘻嘻哈哈" + DateTime.Now.ToString());
                 }
 
                //throw new Exception("我是异常3！" + DateTime.Now.ToString());
