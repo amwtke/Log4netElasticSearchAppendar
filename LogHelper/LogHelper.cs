@@ -47,10 +47,10 @@ namespace LogHelper
         {
             //Console.WriteLine("into error" + System.Threading.Thread.CurrentThread.ManagedThreadId);
             LogErrorHandler handler = new LogErrorHandler(WriteError);
-            handler.BeginInvoke(t, ex, LogInfoCallBack, handler);
+            handler.BeginInvoke(t, ex, LogErrCallBack, handler);
         }
 
-        public static void LogInfoCallBack(IAsyncResult ar)
+        private static void LogInfoCallBack(IAsyncResult ar)
         {
             //Console.WriteLine("log info call back:" + System.Threading.Thread.CurrentThread.ManagedThreadId);
             if (ar == null)
@@ -59,7 +59,7 @@ namespace LogHelper
             LogInfoHandler handler = ar.AsyncState as LogInfoHandler;
             handler.EndInvoke(ar);
         }
-        public static void LogErrCallBack(IAsyncResult ar)
+        private static void LogErrCallBack(IAsyncResult ar)
         {
             //Console.WriteLine("log err call back:" + System.Threading.Thread.CurrentThread.ManagedThreadId);
             if (ar == null)
