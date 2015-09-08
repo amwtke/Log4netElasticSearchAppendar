@@ -1,0 +1,42 @@
+{
+    "settings": {
+        "index": {
+            "number_of_shards": 2,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "trace": {
+            "properties": {
+                "TimeStamp": {
+                    "type": "date",
+                    "format": "dateOptionalTime"
+                },
+                "UserName": {
+                    "type": "string"
+                },
+                "UserId": {
+                    "type": "integer"
+                },
+                "UserEmail": {
+                    "type": "string"
+                },
+                "FromUrl": {
+                    "type": "string"
+                },
+                "NowUrl": {
+                    "type": "string"
+                },
+                "UserIP": {
+                    "type": "string"
+                },
+                "ModelName": {
+                    "type": "string"
+                },
+                "SessionId": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

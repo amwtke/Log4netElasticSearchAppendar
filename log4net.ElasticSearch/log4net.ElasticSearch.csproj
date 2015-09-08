@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Attribute.cs" />
+    <Compile Include="Common\AttributeHelper.cs" />
     <Compile Include="Common\bizs\BizObject.cs" />
     <Compile Include="Common\HTTP\CallBacks\CallBacks.cs" />
     <Compile Include="Common\HTTP\CallBacks\process\IProcess.cs" />

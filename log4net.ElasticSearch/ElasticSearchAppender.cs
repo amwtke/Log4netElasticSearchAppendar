@@ -18,6 +18,17 @@ namespace log4net.ElasticSearch
         private IElasticsearchClient _client;
         private LogEventSmartFormatter _indexName;
         private LogEventSmartFormatter _indexType;
+        
+        public string BizIndexName
+        {
+            get;
+            set;
+        }
+        public string BizIndexType
+        {
+            get;
+            set;
+        }
 
         private readonly Timer _timer;
 
@@ -26,7 +37,7 @@ namespace log4net.ElasticSearch
         public int BulkSize { get; set; }
         public int BulkIdleTimeout { get; set; }
         public int TimeoutToWaitForTimer { get; set; }
-
+        
         // elastic configuration
         public string Server { get; set; }
         public int Port { get; set; }
@@ -134,6 +145,12 @@ namespace log4net.ElasticSearch
             var indexName = _indexName.Format(logEvent).ToLower();
             var indexType = _indexType.Format(logEvent);
 
+            if (logEvent.ContainsKey("isbiz"))
+            {
+                indexName = BizIndexName;
+                indexType = BizIndexType;
+            }
+            
             var operation = new InnerBulkOperation
             {
                 Document = logEvent,
@@ -200,8 +217,28 @@ namespace log4net.ElasticSearch
 
             if (FixedFields.ContainsFlag(FixFlags.Message) && loggingEvent.MessageObject != null)
             {
-                logEvent["Message"] = loggingEvent.MessageObject.ToString();
+                if(AttributeHelper.IsBizObject(loggingEvent.MessageObject))
+                {
+                    BizObject bo = loggingEvent.MessageObject as BizObject;
+
+                    logEvent["isbiz"] = true;
+                    logEvent["TimeStamp"] = loggingEvent.TimeStamp.ToString("O");
+                    logEvent["UserName"] = bo.UserName;
+                    logEvent["UserId"] = bo.UserId;
+                    logEvent["UserEmail"] = bo.UserEmail;
+                    logEvent["FromUrl"] = bo.FromUrl;
+                    logEvent["NowUrl"] = bo.NowUrl;
+                    logEvent["UserIP"] = bo.UserIP;
+                    logEvent["ModelName"] = bo.ModelName;
+                    logEvent["SessionId"] = bo.SessionId;
+
+                    return logEvent;
+                }
+                else
+                {
+                    logEvent["Message"] = loggingEvent.MessageObject.ToString();
                 //logEvent["Message"] = loggingEvent.RenderedMessage;
+                }
             }
 
             logEvent["TimeStamp"] = loggingEvent.TimeStamp.ToString("O");

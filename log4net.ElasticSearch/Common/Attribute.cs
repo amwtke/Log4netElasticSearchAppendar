@@ -12,4 +12,25 @@ namespace log4net.ElasticSearch
         public BizAttribute()
         { }
     }
+
+    [AttributeUsage(AttributeTargets.Property)]
+    public class RequiredAttribute : Attribute
+    {
+        bool _isRequired;
+        public RequiredAttribute(bool isRequired)
+        {
+            _isRequired = isRequired;
+        }
+        public RequiredAttribute()
+        {
+            _isRequired = true;
+        }
+        public bool IsRequired
+        {
+            get
+            {
+                return _isRequired;
+            }
+        }
+    }
 }

@@ -49,8 +49,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="LogSchames\biz_schema.json" />
     <None Include="LogSchames\Program_Schame.json" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\log4net.ElasticSearch\log4net.ElasticSearch.csproj">
+      <Project>{22964cb0-8a39-41ea-807d-b5216d27df70}</Project>
+      <Name>log4net.ElasticSearch</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
