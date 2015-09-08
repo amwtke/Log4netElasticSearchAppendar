@@ -24,7 +24,7 @@ namespace testAppendar
             }
             catch (Exception ex)
             {
-                LogHelper.LogHelper.WriteError(typeof(Program), ex);
+                LogHelper.LogHelper.LogErrorAsync(typeof(Program), ex);
             }
             Console.ReadKey();
         }
