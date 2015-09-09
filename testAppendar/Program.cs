@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LogHelper;
+using LogManager;
 using System.IO;
 using log4net.ElasticSearch;
 namespace testAppendar
@@ -12,35 +12,30 @@ namespace testAppendar
     {
         static void Main(string[] args)
         {
-            //try
-            //{
-            //   //Method2();
-            //    for (int i = 0; i < 5000;i++)
-            //    {
-            //        Console.WriteLine(i);
-            //        LogHelper.LogHelper.LogInfoAsync(typeof(Program), "嘻嘻哈哈" + DateTime.Now.ToString());
-            //    }
-
-            //   //throw new Exception("我是异常3！" + DateTime.Now.ToString());
-            //}
-            //catch (Exception ex)
-            //{
-            //    LogHelper.LogHelper.LogErrorAsync(typeof(Program), ex);
-            //}
-
-
-            BizObject o = new BizObject
+            try
             {
-                UserName = "amwtke",
-                UserId = 1000,
-                UserEmail = "113966473@qq.com",
-                SessionId = "123124324",
-                ModelName = "登录",
-                TimeStamp=DateTime.Now,
-                FromUrl="htllpsadfjsakdf",
-                NowUrl="sssssssssssss"
-            };
-            LogHelper.LogHelper.LogInfoAsync(typeof(Program), o);
+                Method2();
+                //for (int i = 0; i < 5000; i++)
+                //{
+                //    Console.WriteLine(i);
+                //    LogHelper.LogInfoAsync(typeof(Program), "嘻嘻哈哈" + DateTime.Now.ToString());
+                //}
+
+                //throw new Exception("我是异常3！" + DateTime.Now.ToString());
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LogErrorAsync(typeof(Program), ex);
+            }
+
+            LogHelper.LogInfoAsync(typeof(Program), "你们怎么这么吊？？");
+
+            for(int i=0;i<5000;i++)
+            {
+                BizObject o = new BizObject(DateTime.Now, "113966473@qq.com", "test_model"+i.ToString(), "thisisasessionid", "last.aspx", "now.aspx");
+                LogHelper.LogInfoAsync(typeof(Program), o);
+            }
+            
 
             Console.ReadKey();
         }
@@ -56,7 +51,7 @@ namespace testAppendar
             }
             catch (Exception ex)
             {
-                LogHelper.LogHelper.WriteError(typeof(Program), ex);
+                LogHelper.LogErrorAsync(typeof(Program), ex);
             }
             finally
             {

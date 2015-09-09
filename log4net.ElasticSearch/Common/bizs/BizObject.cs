@@ -25,5 +25,14 @@ namespace log4net.ElasticSearch
         public string ModelName { get; set; }
         [Required]
         public string SessionId { get; set; }
+        public BizObject(DateTime timestamp, string useremail, string modelname, string sessionId,string fromUrl,string nowUrl)
+        {
+            TimeStamp = timestamp;
+            UserEmail = useremail;
+            ModelName = modelname;
+            SessionId = sessionId;
+            FromUrl = fromUrl;
+            NowUrl = nowUrl;
+        }
     }
 }

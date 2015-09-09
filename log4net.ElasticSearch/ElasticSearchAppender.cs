@@ -70,8 +70,13 @@ namespace log4net.ElasticSearch
 
             Server = "localhost";
             Port = 9200;
-            IndexName = "LogEvent-%{+yyyy.MM.dd}";
+
+            IndexName = "log";
             IndexType = "LogEvent";
+
+            BizIndexName = "biz";
+            BizIndexType = "trace";
+
             IndexAsync = true;
             MaxAsyncConnections = 10;
             Template = null;
@@ -145,7 +150,7 @@ namespace log4net.ElasticSearch
             var indexName = _indexName.Format(logEvent).ToLower();
             var indexType = _indexType.Format(logEvent);
 
-            if (logEvent.ContainsKey("isbiz"))
+            if (logEvent.ContainsKey("SessionId"))
             {
                 indexName = BizIndexName;
                 indexType = BizIndexType;
@@ -221,7 +226,6 @@ namespace log4net.ElasticSearch
                 {
                     BizObject bo = loggingEvent.MessageObject as BizObject;
 
-                    logEvent["isbiz"] = true;
                     logEvent["TimeStamp"] = loggingEvent.TimeStamp.ToString("O");
                     logEvent["UserName"] = bo.UserName;
                     logEvent["UserId"] = bo.UserId;
