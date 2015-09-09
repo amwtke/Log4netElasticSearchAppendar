@@ -57,10 +57,14 @@ namespace log4net.ElasticSearch
             using (var httpResp = (HttpWebResponse)wr.GetResponse())
             {
                 CheckResponse(httpResp);
-                using (var sr = new StreamReader(httpResp.GetResponseStream(), Encoding.UTF8))
+                string output = System.Configuration.ConfigurationManager.AppSettings["trace_response"];
+                if(!string.IsNullOrEmpty(output) && output.Equals("true"))
                 {
-                    string s = sr.ReadToEnd();
-                    new MyProcess().Process(s);
+                    using (var sr = new StreamReader(httpResp.GetResponseStream(), Encoding.UTF8))
+                    {
+                        string s = sr.ReadToEnd();
+                        new MyProcess().Process(s);
+                    }
                 }
             }
         }
