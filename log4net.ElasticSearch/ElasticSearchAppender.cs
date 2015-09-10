@@ -235,6 +235,7 @@ namespace log4net.ElasticSearch
                     logEvent["UserIP"] = bo.UserIP;
                     logEvent["ModelName"] = bo.ModelName;
                     logEvent["SessionId"] = bo.SessionId;
+                    logEvent["Message"] = bo.Message;
 
                     return logEvent;
                 }

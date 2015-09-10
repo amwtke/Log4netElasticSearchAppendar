@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace log4net.ElasticSearch
 {
+    public enum BizEnum
+    {
+        NOVALUE
+    }
     [Biz]
     public class BizObject
     {
@@ -25,6 +29,7 @@ namespace log4net.ElasticSearch
         public string ModelName { get; set; }
         [Required]
         public string SessionId { get; set; }
+        public string Message { get; set; }
         public BizObject(DateTime timestamp, string useremail, string modelname, string sessionId,string fromUrl,string nowUrl)
         {
             TimeStamp = timestamp;

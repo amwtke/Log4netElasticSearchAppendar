@@ -32,7 +32,8 @@ namespace testAppendar
 
             for(int i=0;i<5000;i++)
             {
-                BizObject o = new BizObject(DateTime.Now, "113966473@qq.com", "test_model"+i.ToString(), "thisisasessionid", "last.aspx", "now.aspx");
+                BizObject o = new BizObject(DateTime.Now, "113966473@qq.com", "test_model"+i.ToString(), Guid.NewGuid().ToString(), BizEnum.NOVALUE.ToString(), "now.aspx");
+                o.Message = "怎么这么吊？！！？";
                 LogHelper.LogInfoAsync(typeof(Program), o);
             }
             

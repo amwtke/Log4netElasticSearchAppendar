@@ -46,10 +46,10 @@ namespace log4net.ElasticSearch
                          return false;
                      }
 
-                     if (pio is int && ((int)pio) == 0)
-                     {
-                         return false;
-                     }
+                     //if (pio is int && ((int)pio) == 0)
+                     //{
+                     //    return false;
+                     //}
                  }
             }
             return true;
