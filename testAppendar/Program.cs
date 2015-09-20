@@ -41,7 +41,7 @@ namespace testAppendar
             Console.ReadKey();
         }
 
-        public static void Method2()
+        public static void Method2() 
         {
             FileStream fs = null;
             try
