@@ -13,7 +13,7 @@ namespace testAppendar
         static void Main(string[] args)
         {
             //try
-            //{
+                //{
             //    Method2();
 
             //    //for (int i = 0; i < 5000; i++)
@@ -30,7 +30,7 @@ namespace testAppendar
             //}
 
             //LogHelper.LogInfoAsync(typeof(Program), "你们怎么这么吊？？");
-
+            
             //for(int i=0;i<5000;i++)
             //{
             //    BizObject o = new BizObject(DateTime.Now, "113966473@qq.com", "test_model"+i.ToString(), Guid.NewGuid().ToString(), BizEnum.NOVALUE.ToString(), "now.aspx",Guid.NewGuid().ToString());
