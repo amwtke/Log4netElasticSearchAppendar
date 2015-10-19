@@ -246,7 +246,10 @@ namespace log4net.ElasticSearch
                             foreach (var p in ps)
                             {
                                 string pName = p.Name;
-                                logEvent[pName] = p.GetValue(bo);
+                                if(pName.Equals("TimeStamp"))
+                                    logEvent["TimeStamp"] = loggingEvent.TimeStamp.ToString("O");
+                                else
+                                    logEvent[pName] = p.GetValue(bo);
                             }
                         }
                     }

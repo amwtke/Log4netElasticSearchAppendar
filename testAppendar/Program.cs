@@ -5,16 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using LogManager;
 using System.IO;
+using System.Threading;
 using log4net.ElasticSearch;
+using Newtonsoft;
+using Newtonsoft.Json;
+
 namespace testAppendar
 {
     class Program
     {
+        static int count = 0;
         static void Main(string[] args)
         {
             //try
-                //{
-            //    Method2();
+            //{
+            //    //Method2();
 
             //    //for (int i = 0; i < 5000; i++)
             //    //{
@@ -30,15 +35,17 @@ namespace testAppendar
             //}
 
             //LogHelper.LogInfoAsync(typeof(Program), "你们怎么这么吊？？");
-            
-            //for(int i=0;i<5000;i++)
+
+            //for (int i = 0; i < 5000; i++)
             //{
-            //    BizObject o = new BizObject(DateTime.Now, "113966473@qq.com", "test_model"+i.ToString(), Guid.NewGuid().ToString(), BizEnum.NOVALUE.ToString(), "now.aspx",Guid.NewGuid().ToString());
+            //    BizObject o = new BizObject(DateTime.Now, "113966473@qq.com", "test_model" + i.ToString(), Guid.NewGuid().ToString(), BizEnum.NOVALUE.ToString(), "now.aspx", Guid.NewGuid().ToString());
             //    o.Message = "怎么这么吊？！！？";
-            //    LogHelper.LogInfoAsync(typeof(Program), o);
+            //    //LogHelper.LogInfoAsync(typeof(Program), o);
+            //    LogHelper.WriteBizLog(o);
             //}
 
             ScanScrollHelper.TransferAsync(1000, ProcessObject);
+            //ScanScrollHelper.Transfer(ProcessObject);
             Console.ReadKey();
         }
 
@@ -66,7 +73,16 @@ namespace testAppendar
 
         private static void ProcessObject<Object>(Object o)
         {
-
+            if (o != null)
+            {
+                BizObject biz = JsonConvert.DeserializeObject<BizObject>(o.ToString());
+                
+                //Console.WriteLine(biz.SessionId);
+                LogManager.LogHelper.LogBizAsync(biz);
+                
+                Interlocked.Increment(ref count);
+                Console.WriteLine(count);
+            }
         }
     }
 }
