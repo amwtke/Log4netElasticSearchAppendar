@@ -13,6 +13,16 @@ namespace log4net.ElasticSearch
     [Biz]
     public class BizObject
     {
+        public BizObject(DateTime timestamp, string useremail, string modelname, string sessionId, string fromUrl, string nowUrl, string user_uuid)
+        {
+            TimeStamp = timestamp;
+            UserEmail = useremail;
+            ModelName = modelname;
+            SessionId = sessionId;
+            FromUrl = fromUrl;
+            NowUrl = nowUrl;
+            UUID = user_uuid;
+        }
         [Required]
         public DateTime TimeStamp { get; set; }
         public string UserName { get; set; }
@@ -30,14 +40,14 @@ namespace log4net.ElasticSearch
         [Required]
         public string SessionId { get; set; }
         public string Message { get; set; }
-        public BizObject(DateTime timestamp, string useremail, string modelname, string sessionId,string fromUrl,string nowUrl)
-        {
-            TimeStamp = timestamp;
-            UserEmail = useremail;
-            ModelName = modelname;
-            SessionId = sessionId;
-            FromUrl = fromUrl;
-            NowUrl = nowUrl;
-        }
+
+        public string UUID { get; set; }
+
+        public string Platform { get; set; }
+
+        public string UnUsed1 { get; set; }
+        public string UnUsed2 { get; set; }
+        public string UnUsed3 { get; set; }
+        
     }
 }

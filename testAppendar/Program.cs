@@ -12,32 +12,33 @@ namespace testAppendar
     {
         static void Main(string[] args)
         {
-            try
-            {
-                Method2();
-                //for (int i = 0; i < 5000; i++)
-                //{
-                //    Console.WriteLine(i);
-                //    LogHelper.LogInfoAsync(typeof(Program), "嘻嘻哈哈" + DateTime.Now.ToString());
-                //}
+            //try
+            //{
+            //    Method2();
 
-                //throw new Exception("我是异常3！" + DateTime.Now.ToString());
-            }
-            catch (Exception ex)
-            {
-                LogHelper.LogErrorAsync(typeof(Program), ex);
-            }
+            //    //for (int i = 0; i < 5000; i++)
+            //    //{
+            //    //    Console.WriteLine(i);
+            //    //    LogHelper.LogInfoAsync(typeof(Program), "嘻嘻哈哈" + DateTime.Now.ToString());
+            //    //}
 
-            LogHelper.LogInfoAsync(typeof(Program), "你们怎么这么吊？？");
+            //    //throw new Exception("我是异常3！" + DateTime.Now.ToString());
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogHelper.LogErrorAsync(typeof(Program), ex);
+            //}
 
-            for(int i=0;i<5000;i++)
-            {
-                BizObject o = new BizObject(DateTime.Now, "113966473@qq.com", "test_model"+i.ToString(), Guid.NewGuid().ToString(), BizEnum.NOVALUE.ToString(), "now.aspx");
-                o.Message = "怎么这么吊？！！？";
-                LogHelper.LogInfoAsync(typeof(Program), o);
-            }
-            
+            //LogHelper.LogInfoAsync(typeof(Program), "你们怎么这么吊？？");
 
+            //for(int i=0;i<5000;i++)
+            //{
+            //    BizObject o = new BizObject(DateTime.Now, "113966473@qq.com", "test_model"+i.ToString(), Guid.NewGuid().ToString(), BizEnum.NOVALUE.ToString(), "now.aspx",Guid.NewGuid().ToString());
+            //    o.Message = "怎么这么吊？！！？";
+            //    LogHelper.LogInfoAsync(typeof(Program), o);
+            //}
+
+            ScanScrollHelper.TransferAsync(1000, ProcessObject);
             Console.ReadKey();
         }
 
@@ -61,6 +62,11 @@ namespace testAppendar
                     fs.Close();
                 fs = null;
             }
+        }
+
+        private static void ProcessObject<Object>(Object o)
+        {
+
         }
     }
 }

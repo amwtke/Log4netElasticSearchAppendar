@@ -1,45 +1,67 @@
 {
-    "settings": {
-        "index": {
-            "number_of_shards": 2,
-            "number_of_replicas": 1
-        }
-    },
-    "mappings": {
-        "trace": {
-            "properties": {
-                "TimeStamp": {
-                    "type": "date",
-                    "format": "dateOptionalTime"
-                },
-                "UserName": {
-                    "type": "string"
-                },
-                "UserId": {
-                    "type": "integer"
-                },
-                "UserEmail": {
-                    "type": "string"
-                },
-                "FromUrl": {
-                    "type": "string"
-                },
-                "NowUrl": {
-                    "type": "string"
-                },
-                "UserIP": {
-                    "type": "string"
-                },
-                "ModelName": {
-                    "type": "string"
-                },
-                "SessionId": {
-                    "type": "string"
-                },
-				"Message": {
-                    "type": "string"
-                }
-            }
-        }
+  "settings": {
+    "index": {
+      "number_of_shards": 2,
+      "number_of_replicas": 1
     }
+  },
+  "mappings": {
+    "trace": {
+      "properties": {
+        "TimeStamp": {
+          "type": "date",
+          "format": "dateOptionalTime"
+        },
+        "UserName": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "UserId": {
+          "type": "integer"
+        },
+        "UserEmail": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "FromUrl": {
+          "type": "string"
+        },
+        "NowUrl": {
+          "type": "string"
+        },
+        "UserIP": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "ModelName": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "SessionId": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "UUID": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "Platform": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "UnUsed1": {
+          "type": "string"
+        },
+        "UnUsed2": {
+          "type": "string"
+        },
+        "UnUsed3": {
+          "type": "string"
+        }
+      }
+    }
+  }
 }

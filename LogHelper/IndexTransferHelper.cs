@@ -14,7 +14,7 @@ namespace LogManager
     public static class ScanScrollHelper
     {
         static ElasticClient _client;
-        readonly static string Address, Port, SrcIndexName, SrcIndexType, DesIndexName, DesIndexType;
+        private static readonly string Address, Port, SrcIndexName, SrcIndexType;
         static Object _syncObject = new object();
 
         static ScanScrollHelper()
@@ -27,16 +27,16 @@ namespace LogManager
                     {
                         try
                         {
-                            Address = ConfigurationManager.AppSettings["address"];
-                            Port = ConfigurationManager.AppSettings["port"];
+                            Address = ConfigurationManager.AppSettings["src_address"];
+                            Port = ConfigurationManager.AppSettings["src_port"];
 
                             SrcIndexName = ConfigurationManager.AppSettings["SrcIndexName"];
                             SrcIndexType = ConfigurationManager.AppSettings["SrcIndexType"];
 
-                            DesIndexName = ConfigurationManager.AppSettings["DesIndexName"];
-                            DesIndexType = ConfigurationManager.AppSettings["DesIndexType"];
+                            //DesIndexName = ConfigurationManager.AppSettings["DesIndexName"];
+                            //DesIndexType = ConfigurationManager.AppSettings["DesIndexType"];
 
-                            var node = new Uri(@"http://" + Address + ":" + Port);//new Uri("http://localhost:9200");
+                            var node = new Uri(@"http://" + Address + ":" + Port);
 
                             var settings = new ConnectionSettings(
                                 node,

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Threading;
 using log4net.ElasticSearch.SmartFormatters;
 using log4net.ElasticSearch.Extensions;
@@ -226,16 +227,29 @@ namespace log4net.ElasticSearch
                 {
                     BizObject bo = loggingEvent.MessageObject as BizObject;
 
-                    logEvent["TimeStamp"] = loggingEvent.TimeStamp.ToString("O");
-                    logEvent["UserName"] = bo.UserName;
-                    logEvent["UserId"] = bo.UserId;
-                    logEvent["UserEmail"] = bo.UserEmail;
-                    logEvent["FromUrl"] = bo.FromUrl;
-                    logEvent["NowUrl"] = bo.NowUrl;
-                    logEvent["UserIP"] = bo.UserIP;
-                    logEvent["ModelName"] = bo.ModelName;
-                    logEvent["SessionId"] = bo.SessionId;
-                    logEvent["Message"] = bo.Message;
+                    //logEvent["TimeStamp"] = loggingEvent.TimeStamp.ToString("O");
+                    //logEvent["UserName"] = bo.UserName;
+                    //logEvent["UserId"] = bo.UserId;
+                    //logEvent["UserEmail"] = bo.UserEmail;
+                    //logEvent["FromUrl"] = bo.FromUrl;
+                    //logEvent["NowUrl"] = bo.NowUrl;
+                    //logEvent["UserIP"] = bo.UserIP;
+                    //logEvent["ModelName"] = bo.ModelName;
+                    //logEvent["SessionId"] = bo.SessionId;
+                    //logEvent["Message"] = bo.Message;
+                    //logEvent[]
+                    if (bo != null)
+                    {
+                        PropertyInfo[] ps = bo.GetType().GetProperties();
+                        if (ps.Length > 0)
+                        {
+                            foreach (var p in ps)
+                            {
+                                string pName = p.Name;
+                                logEvent[pName] = p.GetValue(bo);
+                            }
+                        }
+                    }
 
                     return logEvent;
                 }
