@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using LogManager;
 using System.IO;
 using System.Threading;
+using System.Timers;
 using log4net.ElasticSearch;
 using Newtonsoft;
 using Newtonsoft.Json;
@@ -44,9 +45,25 @@ namespace testAppendar
             //    LogHelper.WriteBizLog(o);
             //}
 
-            ScanScrollHelper.TransferAsync(1000, ProcessObject);
+
+            //ScanScrollHelper.TransferAsync(1000,from,DateTime.Now,ProcessObject);
             //ScanScrollHelper.Transfer(ProcessObject);
+
+            int total = TransferToLocal.BeginDependonFile();
+            Console.WriteLine(total);
+
+            //System.Timers.Timer t = new System.Timers.Timer(1000000);
+            
+            //t.Elapsed += new ElapsedEventHandler(Excute);
             Console.ReadKey();
+        }
+
+        static void Excute(object sender, ElapsedEventArgs e)
+        {
+            Console.WriteLine("Timeer begin");
+            int total = TransferToLocal.BeginDependonFile();
+            Console.WriteLine(total);
+            
         }
 
         public static void Method2()

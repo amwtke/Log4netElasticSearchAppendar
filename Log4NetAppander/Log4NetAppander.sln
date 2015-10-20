@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "log4net.ElasticSearch", "..\log4net.ElasticSearch\log4net.ElasticSearch.csproj", "{22964CB0-8A39-41EA-807D-B5216D27DF70}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testAppendar", "..\testAppendar\testAppendar.csproj", "{4BE11CFC-929C-440F-BB54-FB6E20FC274D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogHelper", "..\LogHelper\LogHelper.csproj", "{E22C9F27-019C-4965-BEC6-F342338836E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogHelperTests", "LogHelperTests\LogHelperTests.csproj", "{5060C40A-1C56-4BC8-BD08-DB5A44EDF830}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{E22C9F27-019C-4965-BEC6-F342338836E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E22C9F27-019C-4965-BEC6-F342338836E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E22C9F27-019C-4965-BEC6-F342338836E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5060C40A-1C56-4BC8-BD08-DB5A44EDF830}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5060C40A-1C56-4BC8-BD08-DB5A44EDF830}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5060C40A-1C56-4BC8-BD08-DB5A44EDF830}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5060C40A-1C56-4BC8-BD08-DB5A44EDF830}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
