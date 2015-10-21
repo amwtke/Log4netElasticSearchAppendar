@@ -24,7 +24,7 @@ namespace log4net.ElasticSearch
             SessionId = sessionId;
             FromUrl = fromUrl;
             NowUrl = nowUrl;
-            UUID = user_uuid;
+            User_UUID = user_uuid;
         }
         [Required]
         [ElasticProperty(Name = "TimeStamp")]
