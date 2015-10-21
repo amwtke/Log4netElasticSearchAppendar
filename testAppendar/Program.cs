@@ -10,14 +10,19 @@ using System.Timers;
 using log4net.ElasticSearch;
 using Newtonsoft;
 using Newtonsoft.Json;
+using System.Configuration;
 
 namespace testAppendar
 {
     class Program
     {
         static int count = 0;
+        private static Boolean flag = true;
+        static string interval = ConfigurationManager.AppSettings["Transfer_interval"];
+        static int interval_int = Convert.ToInt32(interval);
         static void Main(string[] args)
         {
+            #region 
             //try
             //{
             //    //Method2();
@@ -48,22 +53,38 @@ namespace testAppendar
 
             //ScanScrollHelper.TransferAsync(1000,from,DateTime.Now,ProcessObject);
             //ScanScrollHelper.Transfer(ProcessObject);
-
-            int total = TransferToLocal.BeginDependonFile();
-            Console.WriteLine(total);
-
-            //System.Timers.Timer t = new System.Timers.Timer(1000000);
-            
-            //t.Elapsed += new ElapsedEventHandler(Excute);
-            Console.ReadKey();
+            #endregion
+            Console.WriteLine("input \'all\' to sync all,and quit. input anything else to fork thread.");
+            if (Console.ReadLine().ToLower() == "all")
+            {
+                int total = TransferToLocal.BeginDependonFile();
+                Console.WriteLine(total);
+                Console.WriteLine("press any key to quit.");
+                Console.ReadKey();
+            }
+            else
+            { 
+                System.Threading.Thread thread = new Thread(Excute);
+                thread.Start();
+                System.Threading.Thread.Sleep(300);
+                while (flag)
+                {
+                    var key = Console.ReadLine().ToLower();
+                    if (key == "q")
+                    { flag = false; Thread.Sleep(interval_int); }
+                }
+            }
         }
 
-        static void Excute(object sender, ElapsedEventArgs e)
+        static void Excute()
         {
-            Console.WriteLine("Timeer begin");
-            int total = TransferToLocal.BeginDependonFile();
-            Console.WriteLine(total);
-            
+            while(flag)
+            {
+                Console.WriteLine("begin process");
+                int total = TransferToLocal.BeginDependonFile();
+                Console.WriteLine(total);
+                Thread.Sleep(interval_int);
+            }
         }
 
         public static void Method2()
@@ -88,18 +109,5 @@ namespace testAppendar
             }
         }
 
-        private static void ProcessObject<Object>(Object o)
-        {
-            if (o != null)
-            {
-                BizObject biz = JsonConvert.DeserializeObject<BizObject>(o.ToString());
-                
-                //Console.WriteLine(biz.SessionId);
-                LogManager.LogHelper.LogBizAsync(biz);
-                
-                Interlocked.Increment(ref count);
-                Console.WriteLine(count);
-            }
-        }
     }
 }

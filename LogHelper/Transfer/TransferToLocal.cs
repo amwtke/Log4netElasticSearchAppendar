@@ -35,7 +35,7 @@ namespace LogManager
         {
             if (prepareIndex())
             {
-                return ScanScrollHelper.TransferAsync(size_per_round, from, DateTime.Now, ProcessObject);
+                return ScanScrollHelper.TransferAsync(size_per_round, from, to, ProcessObject);
             }
             return 0;
         }
@@ -45,10 +45,11 @@ namespace LogManager
             DateTime? dt = GetTimeFromFile();
             if (dt != null)
             {
-                DateTime dt_now = DateTime.Now;
-                Console.WriteLine("from:"+dt.GetValueOrDefault().ToString()+" TO:"+dt_now.ToString());
-                MarkTimeTofile(dt_now);
-                return BeginTransferAsync(1000, dt.GetValueOrDefault(), dt_now);
+                DateTime dt_now = DateTime.Now.ToUniversalTime();
+                Console.WriteLine("from:"+dt.GetValueOrDefault().ToUniversalTime().ToString()+" TO:"+dt_now.ToString());
+                int total =  BeginTransferAsync(1000, dt.GetValueOrDefault().ToUniversalTime(), dt_now);
+                MarkTimeTofile(DateTime.Now);
+                return total;
             }
             return 0;
         }
@@ -67,12 +68,13 @@ namespace LogManager
             if (o != null)
             {
                 BizObject biz = JsonConvert.DeserializeObject<BizObject>(o.ToString());
-
-                //Console.WriteLine(biz.SessionId);
+                if (string.IsNullOrEmpty(biz.UUID))
+                    biz.UUID = Guid.NewGuid().ToString();
+                
                 LogManager.LogHelper.LogBizAsync(biz);
 
                 Interlocked.Increment(ref count);
-                Console.WriteLine(count);
+                //Console.WriteLine("jjjj"+count);
             }
         }
 
@@ -97,7 +99,7 @@ namespace LogManager
         }
         private static string formateDateTime(DateTime dt)
         {
-            string date = DateTime.Now.ToString("yyyy-MM-dd'T'HH:mm:ss.fff");
+            string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
             return date;
         }
     }

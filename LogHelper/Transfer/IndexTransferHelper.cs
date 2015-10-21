@@ -31,7 +31,7 @@ namespace LogManager
                 .Scroll(ScrollTime)
             );
 
-            var results = ConnectionManager.RemoteClient.Scroll<Object>("2s", scanResults.ScrollId);
+            var results = ConnectionManager.RemoteClient.Scroll<Object>(ScrollTime, scanResults.ScrollId);
             {
                 foreach (object o in results.Documents)
                 {
@@ -41,7 +41,7 @@ namespace LogManager
             }
             while (results.Documents.Any())
             {
-                results = ConnectionManager.RemoteClient.Scroll<Object>("2s", results.ScrollId);
+                results = ConnectionManager.RemoteClient.Scroll<Object>(ScrollTime, results.ScrollId);
 
                 foreach (object o in results.Documents)
                 {
@@ -65,7 +65,7 @@ namespace LogManager
                 .Scroll(ScrollTime)
             );
 
-            var results = ConnectionManager.RemoteClient.Scroll<Object>("2s", scanResults.ScrollId);
+            var results = ConnectionManager.RemoteClient.Scroll<Object>(ScrollTime, scanResults.ScrollId);
             {
                 foreach (object o in results.Documents)
                 {
@@ -75,7 +75,7 @@ namespace LogManager
             }
             while (results.Documents.Any())
             {
-                results = ConnectionManager.RemoteClient.Scroll<Object>("2s", results.ScrollId);
+                results = ConnectionManager.RemoteClient.Scroll<Object>(ScrollTime, results.ScrollId);
 
                 foreach (object o in results.Documents)
                 {
@@ -112,6 +112,8 @@ namespace LogManager
 
         public static int TransferAsync(int size, DateTime from,DateTime to,Action<object> process)
         {
+            //from = from.AddHours(-8);
+            //to = to.AddHours(-8);
             var scanResults = ConnectionManager.RemoteClient.Search<Object>(s => s
                 .Index(SrcIndexName)
                 .Type(SrcIndexType)
@@ -137,7 +139,7 @@ namespace LogManager
 
         private static ISearchResponse<Object> TransferCall(string scrollId, Action<object> process)
         {
-            var results = ConnectionManager.RemoteClient.Scroll<Object>("2s", scrollId);
+            var results = ConnectionManager.RemoteClient.Scroll<Object>(ScrollTime, scrollId);
             if (results.Total != 0)
                 foreach (object o in results.Documents)
                 {

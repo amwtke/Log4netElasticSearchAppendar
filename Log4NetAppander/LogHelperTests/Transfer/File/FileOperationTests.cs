@@ -14,7 +14,7 @@ namespace LogHelper.Tests
         [TestMethod()]
         public void WriteFileTest()
         {
-            string date = DateTime.Now.ToString("yyyy-MM-dd'T'HH:mm:ss.fff");
+            string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
             FileOperation.WriteFile("Transport", date);
 
             Assert.AreEqual(FileOperation.ReadFile("Transport"),date);

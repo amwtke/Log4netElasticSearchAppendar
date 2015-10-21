@@ -63,6 +63,8 @@ namespace log4net.ElasticSearch
         [ElasticProperty(Name = "Message")]
         public string Message { get; set; }
 
+        [ElasticProperty(Index = FieldIndexOption.NotAnalyzed, Name = "User_UUID")]
+        public string User_UUID { get; set; }
 
         [ElasticProperty(Index = FieldIndexOption.NotAnalyzed,Name = "UUID")]
         public string UUID { get; set; }
