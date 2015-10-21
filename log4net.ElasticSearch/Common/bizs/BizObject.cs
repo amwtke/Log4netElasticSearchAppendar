@@ -13,7 +13,7 @@ namespace log4net.ElasticSearch
         NOVALUE
     }
     [Biz]
-    [ElasticType(Name = "trace")]
+    [ElasticType(Name = "trace2")]
     public class BizObject
     {
         public BizObject(DateTime timestamp, string useremail, string modelname, string sessionId, string fromUrl, string nowUrl, string user_uuid)
@@ -25,6 +25,8 @@ namespace log4net.ElasticSearch
             FromUrl = fromUrl;
             NowUrl = nowUrl;
             User_UUID = user_uuid;
+            if(String.IsNullOrEmpty(UUID))
+                UUID = Guid.NewGuid().ToString();
         }
         [Required]
         [ElasticProperty(Name = "TimeStamp")]

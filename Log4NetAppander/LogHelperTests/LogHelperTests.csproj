@@ -52,12 +52,22 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transfer\File\FileOperationTests.cs" />
+    <Compile Include="Transfer\TransferToLocalTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\log4net.ElasticSearch\log4net.ElasticSearch.csproj">
+      <Project>{22964cb0-8a39-41ea-807d-b5216d27df70}</Project>
+      <Name>log4net.ElasticSearch</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\LogHelper\LogHelper.csproj">
       <Project>{E22C9F27-019C-4965-BEC6-F342338836E6}</Project>
       <Name>LogHelper</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
