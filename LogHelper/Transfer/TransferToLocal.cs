@@ -15,7 +15,6 @@ namespace LogManager
     {
         private const string BIZ_INDEX_NAME = "biz";
         private const string MARK_FILE_PATH = "Transport";
-        private static int count = 0;
         private static IndexSettings _bizSettings = new IndexSettings()
         {
             NumberOfReplicas = 1,
@@ -78,7 +77,6 @@ namespace LogManager
             {
                 BizObject bizRemote = JsonConvert.DeserializeObject<BizObject>(o.ToString());
                 if (string.IsNullOrEmpty(bizRemote.UUID))
-
                 {
                     bizRemote.UUID = Guid.NewGuid().ToString();
                     LogHelper.LogBizAsync(bizRemote);
@@ -87,9 +85,11 @@ namespace LogManager
                 {
                     if(GetLocalBizObjectByUUID(bizRemote.UUID)==null)
                         LogHelper.LogBizAsync(bizRemote);
+                    else
+                    {
+                        LogToFile("怎么回事？+uuid:"+ bizRemote.UUID);
+                    }
                 }
-
-                Interlocked.Increment(ref count);
             }
         }
 
@@ -98,7 +98,7 @@ namespace LogManager
             var result = ConnectionManager.LocalClient.Search<BizObject>(s => s
                 .From(0)
                 .Size(10)
-                .Query(q=>q.QueryString(ss=>ss.Query("UUID:"+uuid)))
+                .Query(q=>q.QueryString(ss=>ss.Query("UUID:"+"\""+uuid+"\"")))
                 );
             if (result.Total >=1)
                 return result.Documents.First();
@@ -128,6 +128,13 @@ namespace LogManager
         {
             string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
             return date;
+        }
+
+        private static void LogToFile(string content)
+        {
+            FileOperation.WriteFileAppand("===================", DateTime.Now.ToString("yyyy-mm-dd hh:mm:ss.yyy")+"========================");
+            FileOperation.WriteFileAppand("TransferLog.txt", content);
+            FileOperation.WriteFileAppand("TransferLog.txt", "====================================");
         }
     }
 }

@@ -29,6 +29,25 @@ namespace LogManager
             }
         }
 
+        public static void WriteFileAppand(string filePath,string content)
+        {
+            try
+            {
+                using (FileStream aFile = new FileStream(filePath, //"Log.txt", 
+                    FileMode.OpenOrCreate|FileMode.Append))
+                {
+                    using (StreamWriter sw = new StreamWriter(aFile))
+                    {
+                        sw.WriteLine(content);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         /// <summary>
         /// 只读一行
         /// </summary>

@@ -86,7 +86,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="dll\Newtonsoft.Json.dll" />
-    <None Include="Transport" />
+    <None Include="Transport">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
