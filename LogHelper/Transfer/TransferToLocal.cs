@@ -15,6 +15,7 @@ namespace LogManager
     {
         private const string BIZ_INDEX_NAME = "biz";
         private const string MARK_FILE_PATH = "Transport";
+        private static readonly int inter_val = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["Transfer_interval"]);
         private static IndexSettings _bizSettings = new IndexSettings()
         {
             NumberOfReplicas = 1,
@@ -52,6 +53,7 @@ namespace LogManager
             DateTime? dt = GetTimeFromFile();
             if (dt != null)
             {
+                dt = dt.GetValueOrDefault().AddMilliseconds((-1) * inter_val);
                 Console.WriteLine("from:" + dt.GetValueOrDefault().ToString() + " TO:" + DateTime.Now.ToString());
 
                 DateTime dt_now = DateTime.Now;
