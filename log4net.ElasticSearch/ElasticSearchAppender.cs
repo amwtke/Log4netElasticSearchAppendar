@@ -247,7 +247,11 @@ namespace log4net.ElasticSearch
                             {
                                 string pName = p.Name;
                                 if(pName.Equals("TimeStamp"))
-                                    logEvent["TimeStamp"] = loggingEvent.TimeStamp.ToString("O");
+                                {
+                                    DateTime ts = Convert.ToDateTime(p.GetValue(bo));
+                                    logEvent["TimeStamp"] = ts.ToString("O");
+                                    //logEvent["TimeStamp2"] = loggingEvent.TimeStamp.ToString("O");
+                                }
                                 else
                                     logEvent[pName] = p.GetValue(bo);
                             }
