@@ -87,7 +87,7 @@ namespace LogManager
                         LogHelper.LogBizAsync(bizRemote);
                     else
                     {
-                        LogToFile("怎么回事？+uuid:"+ bizRemote.UUID);
+                        //LogToFile("怎么回事？+uuid:"+ bizRemote.UUID);
                     }
                 }
             }
@@ -132,7 +132,7 @@ namespace LogManager
 
         private static void LogToFile(string content)
         {
-            FileOperation.WriteFileAppand("===================", DateTime.Now.ToString("yyyy-mm-dd hh:mm:ss.yyy")+"========================");
+            FileOperation.WriteFileAppand("TransferLog.txt", "========================"+DateTime.Now.ToString("yyyy-mm-dd hh:mm:ss.yyy")+"========================");
             FileOperation.WriteFileAppand("TransferLog.txt", content);
             FileOperation.WriteFileAppand("TransferLog.txt", "====================================");
         }
