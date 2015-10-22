@@ -52,20 +52,27 @@ namespace log4net.ElasticSearch
             if (ar == null)
                 throw new Exception("WebRequestCallBacks3 fails,because ar is null!");
 
-            SendHandler3 handler = ar.AsyncState as SendHandler3;
-            WebRequest wr = handler.EndInvoke(ar);
-            using (var httpResp = (HttpWebResponse)wr.GetResponse())
+            try
             {
-                CheckResponse(httpResp);
-                string output = System.Configuration.ConfigurationManager.AppSettings["trace_response"];
-                if(!string.IsNullOrEmpty(output) && output.Equals("true"))
+                SendHandler3 handler = ar.AsyncState as SendHandler3;
+                WebRequest wr = handler.EndInvoke(ar);
+                using (var httpResp = (HttpWebResponse)wr.GetResponse())
                 {
-                    using (var sr = new StreamReader(httpResp.GetResponseStream(), Encoding.UTF8))
+                    CheckResponse(httpResp);
+                    string output = System.Configuration.ConfigurationManager.AppSettings["trace_response"];
+                    if (!string.IsNullOrEmpty(output) && output.Equals("true"))
                     {
-                        string s = sr.ReadToEnd();
-                        new MyProcess().Process(s);
+                        using (var sr = new StreamReader(httpResp.GetResponseStream(), Encoding.UTF8))
+                        {
+                            string s = sr.ReadToEnd();
+                            new MyProcess().Process(s);
+                        }
                     }
                 }
+            }
+            catch
+            {
+
             }
         }
 

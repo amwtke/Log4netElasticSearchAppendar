@@ -140,21 +140,31 @@ namespace log4net.ElasticSearch
         }
         private static WebRequest SendRequest3(string url, IEnumerable<InnerBulkOperation> bulk, string credential)
         {
-            Console.WriteLine("sendRequest threadID:" + System.Threading.Thread.CurrentThread.ManagedThreadId);
-
-            var webRequest = WebRequest.Create(string.Concat(url, "_bulk"));
-            webRequest.ContentType = "text/plain";
-            webRequest.Method = "POST";
-            webRequest.Timeout = 10000;
-            SetBasicAuthHeader(webRequest, credential);
-
-            string requestString = PrepareBulk(bulk);
-
-            using (var stream = new StreamWriter(webRequest.GetRequestStream()))
+            try
             {
-                stream.Write(requestString);
+                Console.WriteLine("sendRequest threadID:" + System.Threading.Thread.CurrentThread.ManagedThreadId);
+
+                var webRequest = WebRequest.Create(string.Concat(url, "_bulk"));
+                webRequest.ContentType = "text/plain";
+                webRequest.Method = "POST";
+                webRequest.Timeout = 10000;
+                SetBasicAuthHeader(webRequest, credential);
+
+                string requestString = PrepareBulk(bulk);
+
+                using (var stream = new StreamWriter(webRequest.GetRequestStream()))
+                {
+                    stream.Write(requestString);
+                }
+                return webRequest;
             }
-            return webRequest;
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return null;
+            
         }
 
         private static string PrepareBulk(IEnumerable<InnerBulkOperation> bulk)
